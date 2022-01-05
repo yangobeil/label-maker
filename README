@@ -1,0 +1,7 @@
+ToDo:
+- look at https://kivymd.readthedocs.io/en/latest/components/selection/ to handle selection of labels correctly
+- add button to remove label
+- handle saving of label per image
+- handle keyboard input
+- add button to delete image
+- maybe handle labels as to do list, same as https://dev.to/ngonidzashe/how-to-create-a-simple-to-do-list-application-with-kivymd-d89

@@ -1,0 +1,70 @@
+<LabelMaker>:
+    input: input
+    output: output
+    new_label: new_label
+    labels_list: labels_list
+
+    MDGridLayout:
+        cols: 1
+        size: root.width, root.height
+
+        MDRelativeLayout:
+            size_hint: 1, 0.2
+            md_bg_color: 1,0,0,1
+            MDTextFieldRound:
+                icon_left: "folder"
+                hint_text: "Input folder"
+                size_hint: 0.6, 0.3
+                pos_hint: {'top': 0.9, 'x': 0.1}
+                id: input
+                on_text_validate: root.load()
+            MDFlatButton:
+                text: 'Load'
+                text_color: 1,1,1,1
+                size_hint: 0.1, 0.3
+                pos_hint: {'top': 0.9, 'x': 0.8}
+                on_release: root.load()
+            MDTextFieldRound:
+                icon_left: "folder"
+                hint_text: "Output folder"
+                size_hint: 0.6, 0.3
+                pos_hint: {'y': 0.1, 'x': 0.1}
+                id: output
+            MDFlatButton:
+                text: 'Move'
+                md_bg_color: 1,1,1,1
+                size_hint: 0.1, 0.3
+                pos_hint: {'y': 0.1, 'x': 0.8}
+
+        MDGridLayout:
+            cols: 2
+            MDRelativeLayout:
+                size_hint: 0.7, 0.8
+                md_bg_color: 0,0,0,1
+                Image:
+                    source: root.image_path
+                MDIconButton:
+                    icon: 'chevron-left'
+                    md_bg_color: 0,1,0,1
+                    pos_hint: {'x': 0.02, 'y': 0.02}
+                    on_release: root.previous()
+                MDIconButton:
+                    icon: 'chevron-right'
+                    md_bg_color: 0,1,0,1
+                    pos_hint: {'right': 0.98, 'y': 0.02}
+                    on_release: root.next()
+            MDRelativeLayout:
+                size_hint: 0.3, 0.8
+                md_bg_color: 0,0,1,1
+                MDTextFieldRound:
+                    hint_text: "New label"
+                    size_hint: None, None
+                    size: self.parent.width * 0.8, self.parent.height * 0.2
+                    pos_hint: {'top': 0.9, 'x': 0.1}
+                    id: new_label
+                    on_text_validate: root.add_label()
+                MDSelectionList:
+                    id: labels_list
+
+
+
