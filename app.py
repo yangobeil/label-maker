@@ -1,4 +1,5 @@
 import os
+import shutil
 
 from kivymd.app import MDApp
 from kivy.properties import ObjectProperty, StringProperty
@@ -24,7 +25,7 @@ class LabelMaker(Widget):
         self.index = None
         self.image_labels = {}
         self.checkbox_widgets = {}
-        self.add_list_item_with_checkbox('delete image')
+        self.add_list_item_with_checkbox('delete')
 
     def add_list_item_with_checkbox(self, text):
         item = OneLineAvatarIconListItem(text=text)
@@ -70,6 +71,31 @@ class LabelMaker(Widget):
             self.image_labels[self.image_path] = check.label
         else:
             self.image_labels.pop(self.image_path, None)
+
+    def move(self):
+        if self.output.text:
+            try:
+                for image_path, label in self.image_labels.items():
+                    if label == 'delete':
+                        os.remove(image_path)
+                    else:
+                        destination = os.path.join(self.output.text, label)
+                        if not os.path.isdir(destination):
+                            os.mkdir(destination)
+                        shutil.move(image_path, destination)
+                self.restart()
+                self.refresh_checkboxes()
+            except Exception as e:
+                print(e)
+
+    def restart(self):
+        self.input.text = ''
+        self.output.text = ''
+        self.index = None
+        self.image_labels = {}
+        self.images = []
+        self.image_path = DEFAULT_IMAGE
+
 
 
 class MainApp(MDApp):
