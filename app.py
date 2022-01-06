@@ -25,9 +25,12 @@ class LabelMaker(Widget):
         self.index = None
         self.image_labels = {}
         self.checkbox_widgets = {}
+        # checkbox to delete image is always there
         self.add_list_item_with_checkbox('delete')
 
     def add_list_item_with_checkbox(self, text):
+        """ Create list item widget with a radio button checkbox and the required text. The checkbox widget is added to
+            the list of widgets for use later. The whole widget is added to the app."""
         item = OneLineAvatarIconListItem(text=text)
         checkbox = LeftCheckbox(group='labels checkboxes')
         checkbox.label = text
@@ -37,12 +40,15 @@ class LabelMaker(Widget):
         self.ids.labels_list.add_widget(item)
 
     def load(self):
+        """ Takes input directory, loads the paths of all the images in the directory and displays the first image."""
         if os.path.isdir(self.input.text):
             self.index = 0
             self.images = [os.path.join(self.input.text, name) for name in os.listdir(self.input.text)]
             self.image_path = self.images[self.index]
 
     def refresh_checkboxes(self):
+        """ If current displayed image has a saved label, activate the corresponding checkbox. If not, deactivte all
+            the checkboxes."""
         if self.image_path in self.image_labels.keys():
             self.checkbox_widgets[self.image_labels[self.image_path]].active = True
         else:
@@ -50,29 +56,36 @@ class LabelMaker(Widget):
                 widget.active = False
 
     def next(self):
+        """ Display the next image in the list (if not at the end) and update activation of checkboxes."""
         if self.index is not None:
             self.index = min(self.index + 1, len(self.images) - 1)
             self.image_path = self.images[self.index]
             self.refresh_checkboxes()
 
     def previous(self):
+        """ Display the previous image in the list (if not at the start) and update activation of checkboxes."""
         if self.index is not None:
             self.index = max(self.index - 1, 0)
             self.image_path = self.images[self.index]
             self.refresh_checkboxes()
 
     def add_label(self):
+        """ Add a new checkbox widget for a label if a new one exists."""
         if self.new_label.text:
             self.add_list_item_with_checkbox(text=self.new_label.text)
             self.new_label.text = ''
 
     def update_label(self, check):
+        """ Used when a checkbox is touched. If it is activated the new label is saved for for the current image. If it
+            is deactivated, the saved label is deleted."""
         if check.active:
             self.image_labels[self.image_path] = check.label
         else:
             self.image_labels.pop(self.image_path, None)
 
     def move(self):
+        """ Move or delete all the images with a saved label. Create label directory if necessary and restart the app
+            at the end."""
         if self.output.text:
             try:
                 for image_path, label in self.image_labels.items():
@@ -89,13 +102,13 @@ class LabelMaker(Widget):
                 print(e)
 
     def restart(self):
+        """ Return all the variables to their initial values."""
         self.input.text = ''
         self.output.text = ''
         self.index = None
         self.image_labels = {}
         self.images = []
         self.image_path = DEFAULT_IMAGE
-
 
 
 class MainApp(MDApp):
