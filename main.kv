@@ -53,18 +53,19 @@
                     md_bg_color: 0,1,0,1
                     pos_hint: {'right': 0.98, 'y': 0.02}
                     on_release: root.next()
-            MDRelativeLayout:
+            MDGridLayout:
+                cols: 1
+                id: labels_list
                 size_hint: 0.3, 0.8
                 md_bg_color: 0,0,1,1
                 MDTextFieldRound:
                     hint_text: "New label"
-                    size_hint: None, None
-                    size: self.parent.width * 0.8, self.parent.height * 0.2
-                    pos_hint: {'top': 0.9, 'x': 0.1}
                     id: new_label
                     on_text_validate: root.add_label()
-                MDSelectionList:
-                    id: labels_list
+                ScrollView:
+                    MDList:
+                        size_hint_y: None
+                        id: labels_list
 
 
 
