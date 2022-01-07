@@ -33,6 +33,7 @@ class LabelMaker(Widget):
             the list of widgets for use later. The whole widget is added to the app."""
         item = OneLineAvatarIconListItem(text=text)
         checkbox = LeftCheckbox(group='labels checkboxes')
+        checkbox.selected_color = (0,0,0,1)
         checkbox.label = text
         checkbox.bind(on_release=self.update_label)
         self.checkbox_widgets[text] = checkbox

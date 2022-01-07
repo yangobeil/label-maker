@@ -11,47 +11,36 @@
         MDGridLayout:
             rows: 2
 
-            MDRelativeLayout:
-                size_hint: 0.7, 0.2
-                md_bg_color: 0,0,1,1
-                MDTextFieldRound:
+            MDGridLayout:
+                cols: 2
+                size_hint: 0.6, 0.2
+
+                MDTextFieldRect:
                     icon_left: "folder"
                     hint_text: "Input folder"
-                    text_color: 0,0,0,1
-                    hint_text_color: 0,0,0,1
-                    normal_color: 1,1,1,1
-                    size_hint: 0.6, 0.3
-                    pos_hint: {'top': 0.9, 'x': 0.1}
+                    size_hint_y: 0.1
+                    multiline: False
                     id: input
                     on_text_validate: root.load()
-                MDRoundFlatButton:
+                MDRaisedButton:
                     text: 'Load'
-                    text_color: 0,0,0,1
-                    line_color: 0,0,0,1
-                    background_color: 1,0,0,1
-                    size_hint: 0.1, 0.3
-                    pos_hint: {'top': 0.9, 'x': 0.8}
+                    md_bg_color: 0.3,0.3,0.3,1
+                    size_hint_y: 0.1
                     on_release: root.load()
-                MDTextFieldRound:
+                MDTextFieldRect:
                     icon_left: "folder"
                     hint_text: "Output folder"
-                    text_color: 0,0,0,1
-                    hint_text_color: 0,0,0,1
-                    normal_color: 1,1,1,1
-                    size_hint: 0.6, 0.3
-                    pos_hint: {'y': 0.1, 'x': 0.1}
+                    size_hint_y: 0.1
+                    multiline: False
                     id: output
-                MDRoundFlatButton:
+                MDRaisedButton:
                     text: 'Move'
-                    text_color: 0,0,0,1
-                    line_color: 0,0,0,1
-                    md_bg_color: 1,1,1,1
-                    size_hint: 0.1, 0.3
-                    pos_hint: {'y': 0.1, 'x': 0.8}
+                    md_bg_color: 0.3,0.3,0.3,1
+                    size_hint_y: 0.1
                     on_release: root.move()
 
             MDRelativeLayout:
-                size_hint: 0.7, 0.8
+                size_hint: 0.6, 0.8
                 md_bg_color: 0,0,0,1
                 Image:
                     source: root.image_path
@@ -68,14 +57,19 @@
         MDGridLayout:
             cols: 1
             id: labels_list
-            size_hint: 0.3, 1
+            size_hint: 0.4, 1
             md_bg_color: 1,1,1,1
-            MDTextFieldRound:
-                size_hint: None, None
-                pos_hint: {'x': 0.4}
+            MDTextFieldRect:
+                size_hint_y: 0.1
+                multiline: False
                 hint_text: "New label"
                 id: new_label
                 on_text_validate: root.add_label()
+            MDRaisedButton:
+                text: 'Add'
+                md_bg_color: 0.3,0.3,0.3,1
+                size_hint: 1, 0.05
+                on_release: root.add_label()
             ScrollView:
                 MDList:
                     size_hint_y: None
