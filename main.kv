@@ -4,41 +4,52 @@
     new_label: new_label
     labels_list: labels_list
 
-    MDGridLayout:
-        cols: 1
+    MDBoxLayout:
+        orientation: 'horizontal'
         size: root.width, root.height
 
-        MDRelativeLayout:
-            size_hint: 1, 0.2
-            md_bg_color: 1,0,0,1
-            MDTextFieldRound:
-                icon_left: "folder"
-                hint_text: "Input folder"
-                size_hint: 0.6, 0.3
-                pos_hint: {'top': 0.9, 'x': 0.1}
-                id: input
-                on_text_validate: root.load()
-            MDFlatButton:
-                text: 'Load'
-                text_color: 1,1,1,1
-                size_hint: 0.1, 0.3
-                pos_hint: {'top': 0.9, 'x': 0.8}
-                on_release: root.load()
-            MDTextFieldRound:
-                icon_left: "folder"
-                hint_text: "Output folder"
-                size_hint: 0.6, 0.3
-                pos_hint: {'y': 0.1, 'x': 0.1}
-                id: output
-            MDFlatButton:
-                text: 'Move'
-                md_bg_color: 1,1,1,1
-                size_hint: 0.1, 0.3
-                pos_hint: {'y': 0.1, 'x': 0.8}
-                on_release: root.move()
-
         MDGridLayout:
-            cols: 2
+            rows: 2
+
+            MDRelativeLayout:
+                size_hint: 0.7, 0.2
+                md_bg_color: 0,0,1,1
+                MDTextFieldRound:
+                    icon_left: "folder"
+                    hint_text: "Input folder"
+                    text_color: 0,0,0,1
+                    hint_text_color: 0,0,0,1
+                    normal_color: 1,1,1,1
+                    size_hint: 0.6, 0.3
+                    pos_hint: {'top': 0.9, 'x': 0.1}
+                    id: input
+                    on_text_validate: root.load()
+                MDRoundFlatButton:
+                    text: 'Load'
+                    text_color: 0,0,0,1
+                    line_color: 0,0,0,1
+                    background_color: 1,0,0,1
+                    size_hint: 0.1, 0.3
+                    pos_hint: {'top': 0.9, 'x': 0.8}
+                    on_release: root.load()
+                MDTextFieldRound:
+                    icon_left: "folder"
+                    hint_text: "Output folder"
+                    text_color: 0,0,0,1
+                    hint_text_color: 0,0,0,1
+                    normal_color: 1,1,1,1
+                    size_hint: 0.6, 0.3
+                    pos_hint: {'y': 0.1, 'x': 0.1}
+                    id: output
+                MDRoundFlatButton:
+                    text: 'Move'
+                    text_color: 0,0,0,1
+                    line_color: 0,0,0,1
+                    md_bg_color: 1,1,1,1
+                    size_hint: 0.1, 0.3
+                    pos_hint: {'y': 0.1, 'x': 0.8}
+                    on_release: root.move()
+
             MDRelativeLayout:
                 size_hint: 0.7, 0.8
                 md_bg_color: 0,0,0,1
@@ -54,19 +65,21 @@
                     md_bg_color: 0,1,0,1
                     pos_hint: {'right': 0.98, 'y': 0.02}
                     on_release: root.next()
-            MDGridLayout:
-                cols: 1
-                id: labels_list
-                size_hint: 0.3, 0.8
-                md_bg_color: 0,0,1,1
-                MDTextFieldRound:
-                    hint_text: "New label"
-                    id: new_label
-                    on_text_validate: root.add_label()
-                ScrollView:
-                    MDList:
-                        size_hint_y: None
-                        id: labels_list
+        MDGridLayout:
+            cols: 1
+            id: labels_list
+            size_hint: 0.3, 1
+            md_bg_color: 1,1,1,1
+            MDTextFieldRound:
+                size_hint: None, None
+                pos_hint: {'x': 0.4}
+                hint_text: "New label"
+                id: new_label
+                on_text_validate: root.add_label()
+            ScrollView:
+                MDList:
+                    size_hint_y: None
+                    id: labels_list
 
 
 
