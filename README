@@ -24,3 +24,5 @@ The app has a very simple interface. Here is how to use it:
 - Once you are happy with your labels you can specify a directory where the images should be moved and hit the `move` button to move (or delete) them. A subdirectory will be created for each label.
 
 Note: An interesting modification to do in the future would be to use kivy's file explorer widget instead of using a text input.
+
+If you want many examples of cool apps made with kivy, there is a big lsit [here](https://github.com/kivy/kivy/wiki/List-of-Kivy-Projects).
