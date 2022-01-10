@@ -2,6 +2,7 @@ import os
 import shutil
 
 from kivymd.app import MDApp
+from kivy.core.window import Window
 from kivy.properties import ObjectProperty, StringProperty
 from kivy.uix.widget import Widget
 from kivymd.uix.list import OneLineAvatarIconListItem, ILeftBodyTouch
@@ -27,6 +28,28 @@ class LabelMaker(Widget):
         self.checkbox_widgets = {}
         # checkbox to delete image is always there
         self.add_list_item_with_checkbox('delete')
+        # configure keyboard
+        self._setup_keyboard()
+
+    def _setup_keyboard(self):
+        """ Give app control of the keyboard to monitor the keys that are hit."""
+        self._keyboard = Window.request_keyboard(self._keyboard_closed, self, 'text')
+        self._keyboard.bind(on_key_down=self._on_keyboard_down)
+
+    def _keyboard_closed(self):
+        """ Function to call when the keyboard is requested by another widget to let go of it."""
+        self._keyboard.unbind(on_key_down=self._on_keyboard_down)
+        self._keyboard = None
+
+    def _on_keyboard_down(self, keyboard, keycode, text, modifiers):
+        """ Do something when a key is pressed on the keyboard. Go to next image or previous one depending on
+            arrow that was hit."""
+        if keycode[1] == 'right':
+            self.next()
+        elif keycode[1] == 'left':
+            self.previous()
+
+        return True
 
     def add_list_item_with_checkbox(self, text):
         """ Create list item widget with a radio button checkbox and the required text. The checkbox widget is added to

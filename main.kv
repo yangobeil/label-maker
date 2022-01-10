@@ -21,23 +21,24 @@
                     size_hint_y: 0.1
                     multiline: False
                     id: input
-                    on_text_validate: root.load()
+                    on_text_validate: root.load(); root._setup_keyboard()
                 MDRaisedButton:
                     text: 'Load'
                     md_bg_color: 0.3,0.3,0.3,1
                     size_hint_y: 0.1
-                    on_release: root.load()
+                    on_release: root.load(); root._setup_keyboard()
                 MDTextFieldRect:
                     icon_left: "folder"
                     hint_text: "Output folder"
                     size_hint_y: 0.1
                     multiline: False
                     id: output
+                    on_text_validate: root.move(); root._setup_keyboard()
                 MDRaisedButton:
                     text: 'Move'
                     md_bg_color: 0.3,0.3,0.3,1
                     size_hint_y: 0.1
-                    on_release: root.move()
+                    on_release: root.move(); root._setup_keyboard()
 
             MDRelativeLayout:
                 size_hint: 0.6, 0.8
@@ -64,12 +65,12 @@
                 multiline: False
                 hint_text: "New label"
                 id: new_label
-                on_text_validate: root.add_label()
+                on_text_validate: root.add_label(); root._setup_keyboard()
             MDRaisedButton:
                 text: 'Add'
                 md_bg_color: 0.3,0.3,0.3,1
                 size_hint: 1, 0.05
-                on_release: root.add_label()
+                on_release: root.add_label(); root._setup_keyboard()
             ScrollView:
                 MDList:
                     size_hint_y: None

@@ -20,7 +20,7 @@ It is also possible to package the app for easier use. For windows, this [method
 The app has a very simple interface. Here is how to use it:
 - Specify the folder where your images are located and either press ENTER of hit the `load``button to load the images.
 - Add the possible labels by doing the same thing in the `new label` box.
-- Hit the arrows to go through your images and select the correct label. You can also select to delete the image.
+- Hit the arrows on the app or on your keyboard to go through your images and select the correct label. You can also select to delete the image.
 - Once you are happy with your labels you can specify a directory where the images should be moved and hit the `move` button to move (or delete) them. A subdirectory will be created for each label.
 
 Note: An interesting modification to do in the future would be to use kivy's file explorer widget instead of using a text input.
