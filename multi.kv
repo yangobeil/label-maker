@@ -1,0 +1,84 @@
+<LabelMaker>:
+    input: input
+    output: output
+    new_label: new_label
+    labels_list: labels_list
+
+    MDBoxLayout:
+        orientation: 'horizontal'
+        size: root.width, root.height
+
+        MDGridLayout:
+            rows: 2
+
+            MDGridLayout:
+                cols: 2
+                size_hint: 0.6, 0.2
+
+                MDTextFieldRect:
+                    icon_left: "folder"
+                    hint_text: "Input folder"
+                    size_hint_y: 0.1
+                    multiline: False
+                    id: input
+                    on_text_validate: root.load(); root._setup_keyboard()
+                MDRaisedButton:
+                    text: 'Load'
+                    md_bg_color: 0.3,0.3,0.3,1
+                    size_hint_y: 0.1
+                    on_release: root.load(); root._setup_keyboard()
+                MDTextFieldRect:
+                    icon_left: "folder"
+                    hint_text: "Output folder"
+                    size_hint_y: 0.1
+                    multiline: False
+                    id: output
+                    on_text_validate: root.save(); root._setup_keyboard()
+                MDRaisedButton:
+                    text: 'Save'
+                    md_bg_color: 0.3,0.3,0.3,1
+                    size_hint_y: 0.1
+                    on_release: root.save(); root._setup_keyboard()
+
+            MDRelativeLayout:
+                size_hint: 0.6, 0.8
+                md_bg_color: 0,0,0,1
+                Image:
+                    source: root.image_path
+                MDIconButton:
+                    icon: 'chevron-left'
+                    md_bg_color: 0,1,0,1
+                    pos_hint: {'x': 0.02, 'y': 0.02}
+                    on_release: root.previous()
+                MDIconButton:
+                    icon: 'chevron-right'
+                    md_bg_color: 0,1,0,1
+                    pos_hint: {'right': 0.98, 'y': 0.02}
+                    on_release: root.next()
+        MDGridLayout:
+            cols: 1
+            id: labels_list
+            size_hint: 0.4, 1
+            md_bg_color: 1,1,1,1
+            MDTextFieldRect:
+                size_hint_y: 0.1
+                multiline: False
+                hint_text: "New label"
+                id: new_label
+                on_text_validate: root.add_label(); root._setup_keyboard()
+            MDRaisedButton:
+                text: 'Add'
+                md_bg_color: 0.3,0.3,0.3,1
+                size_hint: 1, 0.05
+                on_release: root.add_label(); root._setup_keyboard()
+            ScrollView:
+                MDList:
+                    size_hint_y: None
+                    id: labels_list
+            MDLabel:
+                text: root.image_name
+                size_hint_y: 0.1
+                halign: "center"
+
+
+
