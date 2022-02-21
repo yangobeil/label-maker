@@ -71,7 +71,7 @@ class LabelMaker(Widget):
             self.image_path = self.images[self.index]
 
     def refresh_checkboxes(self):
-        """ If current displayed image has a saved label, activate the corresponding checkbox. If not, deactivte all
+        """ If current displayed image has a saved label, activate the corresponding checkbox. If not, deactivate all
             the checkboxes."""
         if self.image_path in self.image_labels.keys():
             self.checkbox_widgets[self.image_labels[self.image_path]].active = True
@@ -100,7 +100,7 @@ class LabelMaker(Widget):
             self.new_label.text = ''
 
     def update_label(self, check):
-        """ Used when a checkbox is touched. If it is activated the new label is saved for for the current image. If it
+        """ Used when a checkbox is touched. If it is activated the new label is saved for the current image. If it
             is deactivated, the saved label is deleted."""
         if check.active:
             self.image_labels[self.image_path] = check.label
