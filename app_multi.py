@@ -18,7 +18,6 @@ class LeftCheckbox(ILeftBodyTouch, MDCheckbox):
 
 class LabelMaker(Widget):
     input = ObjectProperty(None)
-    output = ObjectProperty(None)
     new_label = ObjectProperty(None)
     image_path = StringProperty(DEFAULT_IMAGE)
     image_name = StringProperty(DEFAULT_IMAGE)
@@ -27,6 +26,7 @@ class LabelMaker(Widget):
         super().__init__(**kwargs)
         self.index = None
         self.checkbox_widgets = {}
+        self.image_labels = {}
         # configure keyboard
         self._setup_keyboard()
 
@@ -100,7 +100,7 @@ class LabelMaker(Widget):
         if self.index is not None:
             self.index = max(self.index - 1, 0)
             self.image_path = self.images[self.index]
-            self.image_name = os.pa th.basename(self.image_path)
+            self.image_name = os.path.basename(self.image_path)
             self.refresh_checkboxes()
 
     def add_label(self):
@@ -119,8 +119,9 @@ class LabelMaker(Widget):
 
     def save(self):
         """ Save the dictionary of labels."""
-        with open(os.path.join(self.input.text, 'labels.json'), 'w') as f:
-            json.dump(self.image_labels, f)
+        if self.image_labels:
+            with open(os.path.join(self.input.text, 'labels.json'), 'w') as f:
+                json.dump(self.image_labels, f)
 
 
 class MultiApp(MDApp):

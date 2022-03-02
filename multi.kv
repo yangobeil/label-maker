@@ -1,6 +1,5 @@
 <LabelMaker>:
     input: input
-    output: output
     new_label: new_label
     labels_list: labels_list
 
@@ -12,32 +11,29 @@
             rows: 2
 
             MDGridLayout:
-                cols: 2
+                cols: 1
                 size_hint: 0.6, 0.2
 
-                MDTextFieldRect:
-                    icon_left: "folder"
-                    hint_text: "Input folder"
-                    size_hint_y: 0.1
-                    multiline: False
-                    id: input
-                    on_text_validate: root.load(); root._setup_keyboard()
-                MDRaisedButton:
-                    text: 'Load'
-                    md_bg_color: 0.3,0.3,0.3,1
-                    size_hint_y: 0.1
-                    on_release: root.load(); root._setup_keyboard()
-                MDTextFieldRect:
-                    icon_left: "folder"
-                    hint_text: "Output folder"
-                    size_hint_y: 0.1
-                    multiline: False
-                    id: output
-                    on_text_validate: root.save(); root._setup_keyboard()
+                MDGridLayout:
+                    cols: 2
+                    size_hint: 1, 0.1
+
+                    MDTextFieldRect:
+                        icon_left: "folder"
+                        hint_text: "Input folder"
+                        multiline: False
+                        id: input
+                        size_hint_y: 0.1
+                        on_text_validate: root.load(); root._setup_keyboard()
+                    MDRaisedButton:
+                        text: 'Load'
+                        md_bg_color: 0.3,0.3,0.3,1
+                        size_hint_y: 0.1
+                        on_release: root.load(); root._setup_keyboard()
                 MDRaisedButton:
                     text: 'Save'
                     md_bg_color: 0.3,0.3,0.3,1
-                    size_hint_y: 0.1
+                    size_hint: 1, 0.1
                     on_release: root.save(); root._setup_keyboard()
 
             MDRelativeLayout:
