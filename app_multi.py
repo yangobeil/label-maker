@@ -71,7 +71,8 @@ class LabelMaker(Widget):
             if 'labels.json' in os.listdir(self.input.text):
                 with open(os.path.join(self.input.text, 'labels.json'), 'r') as f:
                     self.image_labels = json.load(f)
-                labels = set([x for item in self.image_labels.values() for x in item])
+                labels = list(set([x for item in self.image_labels.values() for x in item]))
+                labels.sort()
                 for label in labels:
                     self.add_list_item_with_checkbox(text=label)
             else:
