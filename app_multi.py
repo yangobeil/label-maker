@@ -70,7 +70,7 @@ class LabelMaker(Widget):
             self.images = [os.path.join(self.input.text, name) for name in os.listdir(self.input.text) if not name.endswith('json')]
             if 'labels.json' in os.listdir(self.input.text):
                 with open(os.path.join(self.input.text, 'labels.json'), 'r') as f:
-                    self.image_labels = json.loads(f)
+                    self.image_labels = json.load(f)
                 labels = set([x for item in self.image_labels.values() for x in item])
                 for label in labels:
                     self.add_list_item_with_checkbox(text=label)
@@ -90,7 +90,10 @@ class LabelMaker(Widget):
     def next(self):
         """ Display the next image in the list (if not at the end) and update activation of checkboxes."""
         if self.index is not None:
-            self.index = min(self.index + 1, len(self.images) - 1)
+            if self.index + 1 > len(self.images) - 1:
+                self.index = 0
+            else:
+                self.index += 1
             self.image_path = self.images[self.index]
             self.image_name = os.path.basename(self.image_path)
             self.refresh_checkboxes()
@@ -98,7 +101,10 @@ class LabelMaker(Widget):
     def previous(self):
         """ Display the previous image in the list (if not at the start) and update activation of checkboxes."""
         if self.index is not None:
-            self.index = max(self.index - 1, 0)
+            if self.index - 1 < 0:
+                self.index = len(self.images) - 1
+            else:
+                self.index -= 1
             self.image_path = self.images[self.index]
             self.image_name = os.path.basename(self.image_path)
             self.refresh_checkboxes()

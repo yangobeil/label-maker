@@ -82,14 +82,20 @@ class LabelMaker(Widget):
     def next(self):
         """ Display the next image in the list (if not at the end) and update activation of checkboxes."""
         if self.index is not None:
-            self.index = min(self.index + 1, len(self.images) - 1)
+            if self.index + 1 > len(self.images) - 1:
+                self.index = 0
+            else:
+                self.index += 1
             self.image_path = self.images[self.index]
             self.refresh_checkboxes()
 
     def previous(self):
         """ Display the previous image in the list (if not at the start) and update activation of checkboxes."""
         if self.index is not None:
-            self.index = max(self.index - 1, 0)
+            if self.index - 1 < 0:
+                self.index = len(self.images) - 1
+            else:
+                self.index -= 1
             self.image_path = self.images[self.index]
             self.refresh_checkboxes()
 
