@@ -1,5 +1,6 @@
 <LabelMaker>:
     input: input
+    index_input: index_input
     new_label: new_label
     labels_list: labels_list
 
@@ -15,7 +16,7 @@
                 size_hint: 0.6, 0.2
 
                 MDGridLayout:
-                    cols: 2
+                    cols: 3
                     size_hint: 1, 0.1
 
                     MDTextFieldRect:
@@ -23,12 +24,17 @@
                         hint_text: "Input folder"
                         multiline: False
                         id: input
-                        size_hint_y: 0.1
+                        size_hint: 0.7, 0.1
                         on_text_validate: root.load(); root._setup_keyboard()
+                    MDTextFieldRect:
+                        hint_text: "Index"
+                        multiline: False
+                        id: index_input
+                        size_hint: 0.1, 0.1
                     MDRaisedButton:
                         text: 'Load'
                         md_bg_color: 0.3,0.3,0.3,1
-                        size_hint_y: 0.1
+                        size_hint: 0.2, 0.1
                         on_release: root.load(); root._setup_keyboard()
                 MDRaisedButton:
                     text: 'Save'

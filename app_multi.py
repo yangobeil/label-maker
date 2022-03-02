@@ -18,6 +18,7 @@ class LeftCheckbox(ILeftBodyTouch, MDCheckbox):
 
 class LabelMaker(Widget):
     input = ObjectProperty(None)
+    index_input = ObjectProperty(None)
     new_label = ObjectProperty(None)
     image_path = StringProperty(DEFAULT_IMAGE)
     image_name = StringProperty(DEFAULT_IMAGE)
@@ -66,8 +67,13 @@ class LabelMaker(Widget):
         """ Takes input directory, loads the paths of all the images in the directory and displays the first image. If
         dictionary with labels already exists in image folder then it is loaded."""
         if os.path.isdir(self.input.text):
-            self.index = 0
+            if self.index_input.text:
+                self.index = int(self.index_input.text)
+            else:
+                self.index = 0
             self.images = [os.path.join(self.input.text, name) for name in os.listdir(self.input.text) if not name.endswith('json')]
+            self.image_path = self.images[self.index]
+            self.image_name = os.path.basename(self.image_path)
             if 'labels.json' in os.listdir(self.input.text):
                 with open(os.path.join(self.input.text, 'labels.json'), 'r') as f:
                     self.image_labels = json.load(f)
