@@ -1,6 +1,5 @@
 import os
 import json
-import shutil
 
 from kivymd.app import MDApp
 from kivy.core.window import Window
@@ -83,8 +82,6 @@ class LabelMaker(Widget):
                     self.add_list_item_with_checkbox(text=label)
             else:
                 self.image_labels = {img: [] for img in self.images}
-                self.image_path = self.images[self.index]
-                self.image_name = os.path.basename(self.image_path)
 
     def refresh_checkboxes(self):
         """ If current displayed image has a saved label, activate the corresponding checkbox. If not, deactivate all
