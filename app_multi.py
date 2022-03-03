@@ -82,6 +82,7 @@ class LabelMaker(Widget):
                     self.add_list_item_with_checkbox(text=label)
             else:
                 self.image_labels = {img: [] for img in self.images}
+            self.refresh_checkboxes()
 
     def refresh_checkboxes(self):
         """ If current displayed image has a saved label, activate the corresponding checkbox. If not, deactivate all
