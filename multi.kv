@@ -51,12 +51,12 @@
                     icon: 'chevron-left'
                     md_bg_color: 0,1,0,1
                     pos_hint: {'x': 0.02, 'y': 0.02}
-                    on_release: root.previous()
+                    on_release: root.previous(); root.save()
                 MDIconButton:
                     icon: 'chevron-right'
                     md_bg_color: 0,1,0,1
                     pos_hint: {'right': 0.98, 'y': 0.02}
-                    on_release: root.next()
+                    on_release: root.next(); root.save()
         MDGridLayout:
             cols: 1
             id: labels_list
