@@ -85,7 +85,6 @@ class LabelMaker(Widget):
                 self.image_labels = {img: [] for img in self.images}
                 self.image_path = self.images[self.index]
                 self.image_name = os.path.basename(self.image_path)
-            print(self.image_labels)
 
     def refresh_checkboxes(self):
         """ If current displayed image has a saved label, activate the corresponding checkbox. If not, deactivate all
