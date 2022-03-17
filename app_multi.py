@@ -70,7 +70,7 @@ class LabelMaker(Widget):
                 self.index = int(self.index_input.text)
             else:
                 self.index = 0
-            self.images = [os.path.join(self.input.text, name) for name in os.listdir(self.input.text) if not name.endswith('json')]
+            self.images = sorted([os.path.join(self.input.text, name) for name in os.listdir(self.input.text) if not name.endswith('json')])
             self.image_path = self.images[self.index]
             self.image_name = os.path.basename(self.image_path)
             if 'labels.json' in os.listdir(self.input.text):
